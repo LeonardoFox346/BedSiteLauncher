@@ -1,0 +1,6 @@
+id=bedside_launcher
+name=床头钟桌面模块
+version=1.0.1
+versionCode=1
+author=LeonardoFox346
+description=把「床头钟」设为系统桌面，并自动配置最近任务/媒体/锁屏所需设置；可选停用原生桌面与多任务提供者。

@@ -486,6 +486,19 @@ fun RecentsOverlay(onDismiss: () -> Unit, onLaunch: (AppEntry) -> Unit) {
                 Text(text = "最近任务", color = Palette.text, fontSize = 17.sp, fontWeight = FontWeight.Medium)
                 Spacer(Modifier.weight(1f))
                 Text(
+                    text = "结束全部",
+                    color = Color(0xFFE08A8A),
+                    fontSize = 12.sp,
+                    modifier = Modifier.clickable {
+                        val pkgs = list.map { it.pkg }
+                        Thread { com.leonardofox.bedside.system.AppKiller.killAll(ctx, pkgs) }.start()
+                        Prefs.recentLaunched.value = emptyList()
+                        Prefs.saveAll()
+                        list = emptyList()
+                    }
+                )
+                Spacer(Modifier.width(14.dp))
+                Text(
                     text = "清除列表",
                     color = Palette.textFaint,
                     fontSize = 12.sp,
@@ -504,19 +517,46 @@ fun RecentsOverlay(onDismiss: () -> Unit, onLaunch: (AppEntry) -> Unit) {
             } else {
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     items(list, key = { it.pkg }) { entry ->
-                        Column(
-                            modifier = Modifier
-                                .size(width = 148.dp, height = 196.dp)
-                                .clip(RoundedCornerShape(22.dp))
-                                .background(Color(0xFF1A1F29))
-                                .border(1.dp, Palette.line, RoundedCornerShape(22.dp))
-                                .clickable { onLaunch(entry) }
-                                .padding(14.dp)
-                        ) {
-                            AppGlyph(entry = entry, size = 50.dp, radius = 16.dp)
-                            Spacer(Modifier.weight(1f))
-                            Text(text = entry.label, color = Palette.text, fontSize = 13.sp, maxLines = 1)
-                            Text(text = entry.pkg, color = Palette.textFaint, fontSize = 9.sp, maxLines = 1)
+                        Box {
+                            Column(
+                                modifier = Modifier
+                                    .size(width = 148.dp, height = 196.dp)
+                                    .clip(RoundedCornerShape(22.dp))
+                                    .background(Color(0xFF1A1F29))
+                                    .border(1.dp, Palette.line, RoundedCornerShape(22.dp))
+                                    .combinedClickable(
+                                        onClick = { onLaunch(entry) },
+                                        onLongClick = {
+                                            Thread { com.leonardofox.bedside.system.AppKiller.kill(ctx, entry.pkg) }.start()
+                                            Prefs.recentLaunched.value = Prefs.recentLaunched.value.filter { it != entry.pkg }
+                                            Prefs.saveAll()
+                                            list = list.filter { it.pkg != entry.pkg }
+                                        }
+                                    )
+                                    .padding(14.dp)
+                            ) {
+                                AppGlyph(entry = entry, size = 50.dp, radius = 16.dp)
+                                Spacer(Modifier.weight(1f))
+                                Text(text = entry.label, color = Palette.text, fontSize = 13.sp, maxLines = 1)
+                                Text(text = entry.pkg, color = Palette.textFaint, fontSize = 9.sp, maxLines = 1)
+                            }
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.TopEnd)
+                                    .padding(8.dp)
+                                    .size(24.dp)
+                                    .clip(androidx.compose.foundation.shape.CircleShape)
+                                    .background(Color(0xCC2A1216))
+                                    .clickable {
+                                        Thread { com.leonardofox.bedside.system.AppKiller.kill(ctx, entry.pkg) }.start()
+                                        Prefs.recentLaunched.value = Prefs.recentLaunched.value.filter { it != entry.pkg }
+                                        Prefs.saveAll()
+                                        list = list.filter { it.pkg != entry.pkg }
+                                    },
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(text = "×", color = Color(0xFFE08A8A), fontSize = 13.sp)
+                            }
                         }
                     }
                 }

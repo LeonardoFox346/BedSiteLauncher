@@ -22,6 +22,7 @@
 - **状态栏**：全隐藏 / 仅导航栏 / 仅状态栏 / 全部显示四档，默认只显示导航栏。
 - **全设备强制横屏**（可选，需要 Root）。
 - **返回逻辑**：浮层 → 设置 → 主页 → 留在应用内；系统 Home 键回到中间主页。
+- **最近任务**：底部上滑打开，长按卡片或点右上角 × 结束该应用后台（Root 下走 `am force-stop`，会一并停掉服务、广播与推送），也可「结束全部」。
 
 ### 控制中心
 - 顶部下拉或右缘左滑打开；媒体卡片（封面 / 进度 / 上一首 / 暂停 / 下一首）、功能磁贴、竖版亮度与音量滑条。
@@ -61,6 +62,19 @@
 
 > 签名证书 SHA-256：`c11e265dde34bc7ebba3644b63102804eab243c38c9b7b6cac1e4d5f4fa87783`。
 > 自带的 debug 预览版已不再提供，请使用上面的正式版。
+
+## Root 模块（Magisk / KernelSU）
+
+[`dist/bedside-launcher-module-v1.0.1.zip`](dist/bedside-launcher-module-v1.0.1.zip) — 通用 Magisk / KernelSU 模块，刷入重启后自动：
+
+- 把「床头钟」设为默认桌面
+- 授予最近任务的用量访问、通知使用权、无障碍锁屏
+- 加入电池优化白名单
+- 可选停用原生桌面（`DISABLE_STOCK=1`，会连同它的多任务提供者一起让出）
+
+配置在 `/data/adb/modules/bedside_launcher/config.env`，卸载模块会自动恢复原生桌面。详见 [magisk-module/README.md](magisk-module/README.md)。
+
+> 模块只使用 Android 自带命令（`pm` / `cmd` / `settings` / `appops` / `dumpsys`），不依赖 Magisk 专有工具，KernelSU 与 Magisk 均可使用。
 
 ## 反馈
 
