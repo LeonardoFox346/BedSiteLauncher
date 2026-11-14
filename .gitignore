@@ -17,5 +17,3 @@ local.properties
 # 临时
 *.log
 *.hprof
-# 作者头像素材（不公开）
-app/src/main/assets/avatar.bin

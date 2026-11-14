@@ -5,7 +5,7 @@
 [![GPLv3](https://img.shields.io/badge/License-GPLv3-3482FF.svg)](LICENSE)
 [![Android](https://img.shields.io/badge/Android-11%2B-3DDC84.svg)](#兼容性)
 [![Kotlin](https://img.shields.io/badge/Kotlin-Jetpack%20Compose-7F52FF.svg)](#构建)
-[![Version](https://img.shields.io/badge/version-0.1.0%20preview-8A2BE2.svg)](docs/demo/demo-home.png)
+[![Version](https://img.shields.io/badge/version-1.0.1-8A2BE2.svg)](docs/demo/demo-home.png)
 
 ![主页](docs/demo/demo-home.png)
 
@@ -55,11 +55,17 @@
 |---|---|
 | ![关于](docs/demo/demo-about.png) | ![屏保](docs/demo/demo-screensaver.png) |
 
-## 下载测试版
+## 下载
 
-- [`dist/BedsideLauncher-preview.apk`](dist/BedsideLauncher-preview.apk) — v0.1.0 preview（debug 签名）
+- [`dist/BedsideLauncher-1.0.1.apk`](dist/BedsideLauncher-1.0.1.apk) — **v1.0.1 正式版**（release 签名，约 43 MB）
 
-> APK 约 80 MB，包含完整调试信息；正式版会改用 R8 压缩并做 release 签名。
+> 签名证书 SHA-256：`c11e265dde34bc7ebba3644b63102804eab243c38c9b7b6cac1e4d5f4fa87783`。
+> 自带的 debug 预览版已不再提供，请使用上面的正式版。
+
+## 反馈
+
+- 遇到 Bug 或有建议：[提交 Issue](https://github.com/LeonardoFox346/BedSiteLauncher/issues/new/choose)
+- 应用内入口：「桌面设置 → 问题反馈 Issue / 源码仓库」
 
 ## 兼容性
 

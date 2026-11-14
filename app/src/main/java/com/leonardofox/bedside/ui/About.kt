@@ -70,6 +70,11 @@ fun GplBadge(height: Int = 28) {
 fun AboutPanel(onClose: () -> Unit) {
     val ctx = LocalContext.current
     val avatar = remember { AvatarAssets.load(ctx) }
+    val versionName = remember {
+        runCatching {
+            ctx.packageManager.getPackageInfo(ctx.packageName, 0).versionName ?: ""
+        }.getOrDefault("")
+    }
     PanelScaffold(title = "关于此应用", onClose = onClose) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
@@ -86,7 +91,7 @@ fun AboutPanel(onClose: () -> Unit) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = "床头钟 Bedside Launcher", color = Palette.text, fontSize = 19.sp, fontWeight = FontWeight.Medium)
                 Spacer(Modifier.height(3.dp))
-                Text(text = "v0.1.0 preview · 作者 LeonardoFox346", color = Palette.textFaint, fontSize = 11.sp)
+                Text(text = "v" + versionName + " · 作者 LeonardoFox346", color = Palette.textFaint, fontSize = 11.sp)
                 Spacer(Modifier.height(3.dp))
                 Text(text = "以 GNU GPL v3.0 发布 · 不收集任何个人数据", color = Palette.textFaint, fontSize = 9.sp)
             }

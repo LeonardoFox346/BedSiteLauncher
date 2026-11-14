@@ -534,7 +534,10 @@ fun DeskSettingsPanel(
                         modifier = Modifier.clickable { RootShell.probe() }
                     )
                     Spacer(Modifier.weight(1f))
-                    Text(text = "床头钟 v0.1.0", color = Palette.textFaint, fontSize = 9.sp)
+                    val vName = runCatching {
+                        ctx.packageManager.getPackageInfo(ctx.packageName, 0).versionName ?: ""
+                    }.getOrDefault("")
+                    Text(text = "床头钟 v" + vName, color = Palette.textFaint, fontSize = 9.sp)
                 }
             }
 
@@ -603,6 +606,15 @@ fun DeskSettingsPanel(
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     LinkRow("隐私政策", Modifier.weight(1f)) { onOpenPrivacy() }
                     LinkRow("开源许可 GPLv3", Modifier.weight(1f)) { onOpenLicense() }
+                }
+                Spacer(Modifier.height(8.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    LinkRow("问题反馈 Issue", Modifier.weight(1f)) {
+                        SysUi.openUrl(ctx, "https://github.com/LeonardoFox346/BedSiteLauncher/issues/new/choose")
+                    }
+                    LinkRow("源码仓库", Modifier.weight(1f)) {
+                        SysUi.openUrl(ctx, "https://github.com/LeonardoFox346/BedSiteLauncher")
+                    }
                 }
             }
         }
