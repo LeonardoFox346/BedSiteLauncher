@@ -5,7 +5,7 @@
 [![GPLv3](https://img.shields.io/badge/License-GPLv3-3482FF.svg)](LICENSE)
 [![Android](https://img.shields.io/badge/Android-11%2B-3DDC84.svg)](#兼容性)
 [![Kotlin](https://img.shields.io/badge/Kotlin-Jetpack%20Compose-7F52FF.svg)](#构建)
-[![Version](https://img.shields.io/badge/version-1.0.1-8A2BE2.svg)](docs/demo/demo-home.png)
+[![Version](https://img.shields.io/badge/version-1.0.2-8A2BE2.svg)](docs/demo/demo-home.png)
 
 ![主页](docs/demo/demo-home.png)
 
@@ -58,14 +58,14 @@
 
 ## 下载
 
-- [`dist/BedsideLauncher-1.0.1.apk`](dist/BedsideLauncher-1.0.1.apk) — **v1.0.1 正式版**（release 签名，约 43 MB）
+- [`dist/BedsideLauncher-1.0.2.apk`](dist/BedsideLauncher-1.0.2.apk) — **v1.0.2 正式版**（release 签名，约 43 MB）
 
 > 签名证书 SHA-256：`c11e265dde34bc7ebba3644b63102804eab243c38c9b7b6cac1e4d5f4fa87783`。
 > 自带的 debug 预览版已不再提供，请使用上面的正式版。
 
 ## Root 模块（Magisk / KernelSU）
 
-[`dist/bedside-launcher-module-v1.0.1.zip`](dist/bedside-launcher-module-v1.0.1.zip) — 通用 Magisk / KernelSU 模块，刷入重启后自动：
+[`dist/bedside-launcher-module-v1.0.2.zip`](dist/bedside-launcher-module-v1.0.2.zip) — 通用 Magisk / KernelSU 模块，刷入重启后自动：
 
 - 把「床头钟」设为默认桌面
 - 授予最近任务的用量访问、通知使用权、无障碍锁屏
@@ -102,6 +102,12 @@ export JAVA_HOME="/path/to/Android Studio/jbr"
 > 项目路径含中文时已启用 `android.overridePathCheck=true`；若 Gradle 仍报路径问题，可用纯英文 junction 指向本项目再构建。
 
 ## 安装
+
+### 方式一：Magisk / KernelSU 模块（推荐，已 Root）
+
+刷入 [`dist/bedside-launcher-module-v1.0.2.zip`](dist/bedside-launcher-module-v1.0.2.zip) 并重启即可：自动设为默认桌面、授予最近任务/通知使用权/无障碍，可选停用原生桌面与它的多任务提供者。配置见 [magisk-module/README.md](magisk-module/README.md)。
+
+### 方式二：adb 手动安装
 
 ```bash
 adb install -r app-debug.apk
